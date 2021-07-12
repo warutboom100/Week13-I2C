@@ -3190,10 +3190,13 @@ LOAD c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000020000000                _sdata = .
  *(.data)
  *(.data*)
- .data.IOExpdrDataWrite
+ .data.IOExpdrExampleWriteFlag
                 0x0000000020000000        0x1 Core/Src/main.o
-                0x0000000020000000                IOExpdrDataWrite
- *fill*         0x0000000020000001        0x3 
+                0x0000000020000000                IOExpdrExampleWriteFlag
+ .data.IOExpdrDataWrite
+                0x0000000020000001        0x1 Core/Src/main.o
+                0x0000000020000001                IOExpdrDataWrite
+ *fill*         0x0000000020000002        0x2 
  .data.Setting.7660
                 0x0000000020000004       0x16 Core/Src/main.o
  *fill*         0x000000002000001a        0x2 
@@ -3216,7 +3219,7 @@ LOAD c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .igot.plt      0x0000000020000028        0x0 c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 0x0000000020000028                . = ALIGN (0x4)
 
-.bss            0x0000000020000028       0xc8 load address 0x0000000008004940
+.bss            0x0000000020000028       0xc4 load address 0x0000000008004940
                 0x0000000020000028                _sbss = .
                 0x0000000020000028                __bss_start__ = _sbss
  *(.bss)
@@ -3228,31 +3231,28 @@ LOAD c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .bss.eepromExampleReadFlag
                 0x0000000020000045        0x1 Core/Src/main.o
                 0x0000000020000045                eepromExampleReadFlag
- .bss.IOExpdrExampleWriteFlag
-                0x0000000020000046        0x1 Core/Src/main.o
-                0x0000000020000046                IOExpdrExampleWriteFlag
  .bss.IOExpdrExampleReadFlag
-                0x0000000020000047        0x1 Core/Src/main.o
-                0x0000000020000047                IOExpdrExampleReadFlag
+                0x0000000020000046        0x1 Core/Src/main.o
+                0x0000000020000046                IOExpdrExampleReadFlag
  .bss.data.7667
-                0x0000000020000048        0x1 Core/Src/main.o
+                0x0000000020000047        0x1 Core/Src/main.o
  *(COMMON)
- *fill*         0x0000000020000049        0x3 
- COMMON         0x000000002000004c       0xa0 Core/Src/main.o
-                0x000000002000004c                hi2c1
-                0x00000000200000a0                IOExpdrDataReadBack
-                0x00000000200000a4                eepromDataReadBack
-                0x00000000200000a8                Switchz
-                0x00000000200000ac                huart2
- COMMON         0x00000000200000ec        0x4 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
-                0x00000000200000ec                uwTick
-                0x00000000200000f0                . = ALIGN (0x4)
-                0x00000000200000f0                _ebss = .
-                0x00000000200000f0                __bss_end__ = _ebss
+ COMMON         0x0000000020000048       0xa0 Core/Src/main.o
+                0x0000000020000048                hi2c1
+                0x000000002000009c                IOExpdrDataReadBack
+                0x00000000200000a0                eepromDataReadBack
+                0x00000000200000a4                Switchz
+                0x00000000200000a8                huart2
+ COMMON         0x00000000200000e8        0x4 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+                0x00000000200000e8                uwTick
+                0x00000000200000ec                . = ALIGN (0x4)
+                0x00000000200000ec                _ebss = .
+                0x00000000200000ec                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x00000000200000f0      0x600 load address 0x0000000008004940
+                0x00000000200000ec      0x604 load address 0x0000000008004940
                 0x00000000200000f0                . = ALIGN (0x8)
+ *fill*         0x00000000200000ec        0x4 
                 [!provide]                        PROVIDE (end = .)
                 0x00000000200000f0                PROVIDE (_end = .)
                 0x00000000200002f0                . = (. + _Min_Heap_Size)

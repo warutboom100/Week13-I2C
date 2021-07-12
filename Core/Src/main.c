@@ -49,7 +49,7 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 uint8_t eepromExampleWriteFlag = 0;
 uint8_t eepromExampleReadFlag = 0;
-uint8_t IOExpdrExampleWriteFlag = 0;
+uint8_t IOExpdrExampleWriteFlag = 1;
 uint8_t IOExpdrExampleReadFlag = 0;
 uint8_t eepromDataReadBack[4];
 uint8_t IOExpdrDataReadBack;
@@ -115,12 +115,14 @@ int main(void)
   									&IOExpdrDataWrite, 1);
 
   HAL_Delay(100);
+
   EEPROMReadExample(&IOExpdrDataWrite, 1);
+  IOExpenderWritePinB(IOExpdrDataWrite);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  	IOExpenderWritePinB(IOExpdrDataWrite);
+
 	while (1) {
 		Switchz[0] = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
 		if(Switchz[0]== GPIO_PIN_RESET && Switchz[1]== GPIO_PIN_SET){
@@ -128,19 +130,19 @@ int main(void)
 			eepromExampleWriteFlag = 1;
 			IOExpdrExampleWriteFlag = 1;
 			eepromExampleReadFlag = 1;
-
-			IOExpenderReadPinA(&IOExpdrDataReadBack);
-			HAL_Delay(100);
-
-			EEPROMWriteExample();
-			HAL_Delay(100);
-
-			HAL_I2C_Mem_Read_IT(&hi2c1, EEPROM_ADDR, 0x47, I2C_MEMADD_SIZE_16BIT,
-									&IOExpdrDataWrite, 1);
-
-			HAL_Delay(100);
-			EEPROMReadExample(&IOExpdrDataWrite, 1);
 		}
+		IOExpenderReadPinA(&IOExpdrDataReadBack);
+		HAL_Delay(100);
+
+		EEPROMWriteExample();
+		HAL_Delay(100);
+
+		HAL_I2C_Mem_Read_IT(&hi2c1, EEPROM_ADDR, 0x47, I2C_MEMADD_SIZE_16BIT,
+											&IOExpdrDataWrite, 1);
+
+		HAL_Delay(100);
+
+		EEPROMReadExample(&IOExpdrDataWrite, 1);
 		IOExpenderWritePinB(IOExpdrDataWrite);
 		Switchz[1] = Switchz[0];
     /* USER CODE END WHILE */
