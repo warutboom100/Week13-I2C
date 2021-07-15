@@ -117,7 +117,7 @@ int main(void)
   HAL_Delay(100);
 
   EEPROMReadExample(&IOExpdrDataWrite, 1);
-  IOExpenderWritePinB(IOExpdrDataWrite);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -137,12 +137,8 @@ int main(void)
 		EEPROMWriteExample();
 		HAL_Delay(100);
 
-		HAL_I2C_Mem_Read_IT(&hi2c1, EEPROM_ADDR, 0x47, I2C_MEMADD_SIZE_16BIT,
-											&IOExpdrDataWrite, 1);
-
-		HAL_Delay(100);
-
 		EEPROMReadExample(&IOExpdrDataWrite, 1);
+		HAL_Delay(100);
 		IOExpenderWritePinB(IOExpdrDataWrite);
 		Switchz[1] = Switchz[0];
     /* USER CODE END WHILE */
